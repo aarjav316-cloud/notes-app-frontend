@@ -10,7 +10,9 @@ function Login() {
   const handleSubmit = (e) => {
 
     e.preventDefault()
-    login()
+    login({
+        email, password
+    })
 
   }
 
@@ -50,3 +52,9 @@ function Login() {
 }
 
 export default Login;
+
+
+
+
+
+

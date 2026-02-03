@@ -1,4 +1,4 @@
-import { useState, useContext, use } from "react";
+import { useState, useContext,  } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -13,13 +13,17 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await register();
+    const res = await register({
+        name,
+        email,
+        password
+    });
     if (res?.success) navigate("/login");
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit} >
         <h2>Register</h2>
 
         <input
