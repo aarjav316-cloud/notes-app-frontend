@@ -1,9 +1,9 @@
-import { useState, useContext,  } from "react";
+import { useState, useContext, useEffect,  } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-  const { register, error, authLoading } = useContext(AuthContext);
+  const { register, error, authLoading , isAuthenticated  } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -20,6 +20,12 @@ function Register() {
     });
     if (res?.success) navigate("/login");
   };
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      navigate("/notes")
+    }
+  }, [isAuthenticated])
 
   return (
     <div>

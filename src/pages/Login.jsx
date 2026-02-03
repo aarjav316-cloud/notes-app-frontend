@@ -1,11 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { login, authLoading, error } = useContext(AuthContext);
+  const { login, authLoading, error , isAuthenticated } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
 
@@ -15,6 +18,12 @@ function Login() {
     })
 
   }
+
+  useEffect(() => {
+    if(isAuthenticated){
+      navigate("/notes");
+    }
+  }, [isAuthenticated])
 
   return (
     <div>
