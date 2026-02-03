@@ -1,9 +1,10 @@
-import { Children, createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { loginUser, registerUser } from "../api/auth.api";
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
+
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     setLoading(false);
   }, []);
+
 
   const login = async (formData) => {
     try {
