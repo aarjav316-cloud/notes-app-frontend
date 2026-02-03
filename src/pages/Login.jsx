@@ -10,7 +10,7 @@ function Login() {
   const handleSubmit = (e) => {
 
     e.preventDefault()
-    login(FormData)
+    login()
 
   }
 
@@ -24,7 +24,7 @@ function Login() {
           placeholder="email"
           className="border p-2"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={  (e) => setEmail(e.target.value)}
         />
 
         <input
