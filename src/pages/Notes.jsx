@@ -3,7 +3,7 @@ import React from 'react'
 function Notes() {
   return (
     <div>
-      <h1>System</h1>
+      <h1 className='p-6 text-xl' >Notes Page (Protected)</h1>
     </div>
   )
 }
