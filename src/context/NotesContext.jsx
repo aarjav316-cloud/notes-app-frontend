@@ -1,9 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState , useContext } from "react";
 import { fetchNotes } from "../api/notes.api";
+import { AuthContext } from "./AuthContext";
 
 export  const  NotesContext = createContext()
 
 export const NotesProvider =  ({children}) => {
+    
+    const { isAuthenticated } = useContext(AuthContext);
+
 
     const [notes , setNotes] = useState([])
     const [loading , setLoading] = useState(true)
@@ -25,11 +29,15 @@ export const NotesProvider =  ({children}) => {
     }
 
     useEffect(() => {
-       loadNotes()
-    }, []);
+        if (isAuthenticated) {
+          loadNotes();
+        }
+      }, [isAuthenticated]);
+      
 
 
     return (
+
         <NotesContext.Provider
            value={{
             notes,
@@ -43,6 +51,4 @@ export const NotesProvider =  ({children}) => {
 
         </NotesContext.Provider>
     )
-
-
 }
