@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState , useContext } from "react";
-import { fetchNotes } from "../api/notes.api";
+import { fetchNotes , createNotes , deleteNotes  } from "../api/notes.api";
 import { AuthContext } from "./AuthContext";
 
 export  const  NotesContext = createContext()
@@ -28,6 +28,28 @@ export const NotesProvider =  ({children}) => {
         }
     }
 
+    const addNote = async (formData) => {
+        try {
+
+            const data = await createNotes(formData)
+            setNotes((prev) => [data.notes , ...prev]);
+            
+        } catch (error) {
+            setError(error.message)
+        }
+    }
+
+    const removeNote = async (id) => {
+        try {
+
+          await deleteNotes(id)
+          setNotes((prev) => prev.filter((note) => note._id !== id ))
+            
+        } catch (error) {
+            setError(error.message)
+        }
+    }
+
     useEffect(() => {
         if (isAuthenticated) {
           loadNotes();
@@ -43,7 +65,9 @@ export const NotesProvider =  ({children}) => {
             notes,
             reloadNotes:loadNotes,
             loading,
-            error
+            error,
+            addNote,
+            removeNote
            }}
         >
             
